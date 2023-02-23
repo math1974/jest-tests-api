@@ -12,7 +12,7 @@ test('filter USA patients', () => {
 		name: 'fernando',
 		country: 'BR'
 	}, {
-		id: 4,
+		id: 5,
 		name: 'Carla',
 		country: 'USA'
 	}];
