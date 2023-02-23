@@ -1,4 +1,8 @@
 const filterAmericanPatients = list => {
+	if (!list) {
+		return []
+	};
+
 	return list?.filter(patient => patient.country === 'USA');
 };
 
@@ -8,7 +12,7 @@ test('filter USA patients', () => {
 		name: 'matheus',
 		country: 'USA'
 	}, {
-		id: 2,
+		id: 3,
 		name: 'fernando',
 		country: 'BR'
 	}, {
