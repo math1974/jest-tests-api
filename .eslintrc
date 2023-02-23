@@ -10,10 +10,10 @@
 		"node": true,
 		"commonjs": true,
 		"es6": true,
-		"mocha": true
+		"jest": true
 	},
 	"rules": {
-		"no-nonoctal-decimal-escape": false,
+		"no-nonoctal-decimal-escape": 0,
 		"brace-style": [
 			"error",
 			"1tbs",
