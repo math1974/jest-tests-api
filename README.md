@@ -2,16 +2,16 @@
 
 yarn add jest -D
 
-yarn run test -> “jest”
+yarn run test: "jest"
 
-Watch changes: “jest —watch” // get the watch mode and always run test in changes
+Watch changes: "jest —watch"
 
-Create snapshots:
-	toMatchSnapshots (lists, results expected of tests):
-		- it creates a snapshots folder which will contain the file which is being tested with the result
-		- if you add something new to the array or result, you should run yarn run jest -- -u
+Create snapshots::
+- toMatchSnapshots:
+		- it creates a snapshots folder which will contain the file which is being tested with the result.
+		- if you add something new to the array or result, you should run "yarn run jest -- -u".
 
-	toMatchInlineSnapshot:
+- toMatchInlineSnapshot:
 		- different from the toMatchSnapshot, it doesn’t create a file with the result, it creates the result inline, in the test file.
 
 Options:
