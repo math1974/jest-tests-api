@@ -11,8 +11,7 @@
   },
   "lint-staged": {
     "**/*.+(js|json|css|html|md)": [
-      "jest --findRelatedTests",
-      "git add"
+      "jest --findRelatedTests"
     ],
     "*.js": "eslint --cache --fix"
   },
