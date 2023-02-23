@@ -1,9 +1,8 @@
 {
-  "name": "boilerplate-api",
-  "version": "v1.0.2",
+  "name": "jest-tests-api",
+  "version": "v1.0.1",
   "main": "index.js",
-  "repository": "git@github.com:amigoapp/boilerplate-api.git",
-  "author": "Augusto Ferreira <augusto.ferreira@amigoapp.com.br>",
+  "author": "Matheus Ribeiro <MaverickHenrique1010@gmail.com>",
   "license": "MIT",
   "engines": {
     "node": ">= 16 <= 16.14.0",
@@ -24,11 +23,7 @@
     "lint": "eslint --ext .js ./src",
     "lint:fix": "yarn lint --fix",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "build": "yarn build:api && yarn build:templates && yarn upload-sourcemaps",
-    "upload-sourcemaps": "node upload-sourcemaps.js",
-    "build:api": "babel ./index.js --out-dir ./build --source-maps && babel ./src --out-dir ./build/src --source-maps",
-    "build:templates": "copy './src/templates/*.html' './build/src/templates'"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@bugsnag/js": "^7.16.1",
