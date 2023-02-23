@@ -1,0 +1,306 @@
+<html>
+
+	<head>
+		<meta charset="utf8">
+		<title>{{ title }}</title>
+		<style>
+			body {
+				width: 99%;
+				font-weight: 400;
+				font-size: 13px;
+				font-family: Helvetica, Arial, sans-serif;
+			}
+
+			.clearfix {
+				clear: both;
+			}
+
+			table {
+				display: block;
+				width: 100%;
+				font-size: 10px;
+				line-height: 10px;
+				border-spacing: 0;
+				border-collapse: collapse;
+			}
+
+			table td,
+			table th {
+				border: 1px solid #ddd;
+				text-align: left;
+			}
+
+			.text-light {
+				color: #AFC1CF;
+			}
+
+			.text-right {
+				text-align: right;
+			}
+
+			table tr>th {
+				border: none;
+				padding-bottom: 3px;
+			}
+
+			table tr>td {
+				border-left: none;
+				border-right: none;
+				border-width: 1px;
+				border-color: #efefef;
+				padding: 3px 5px;
+			}
+
+			.bold {
+				font-weight: bold;
+			}
+
+			.default-table {
+				margin-top: 20px;
+			}
+
+			.default-table th {
+				padding: 5px;
+			}
+
+			.m-b-10 {
+				margin-bottom: 10px !important;
+			}
+
+			.text-small {
+				font-size: 12px;
+			}
+
+			.text-green {
+				color: #27ae60;
+			}
+
+			.text-danger {
+				color: #ed5565;
+			}
+
+			.text-ellipsis {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+
+			.report-company-info {
+				float: left;
+				width: 100%;
+			}
+
+			.report-company-info .company-name {
+				float: left;
+				text-transform: uppercase;
+				font-size: 11px;
+				padding-top: 6px;
+			}
+
+			.report-company-info .div-logo {
+				float: right;
+			}
+
+			.report-company-info .div-logo .logo {
+				max-width: 30px;
+				max-height: 30px;
+			}
+
+			.report-info {
+				width: 100%;
+				float: left;
+				padding: 0;
+				margin-top: 2px;
+			}
+
+			.report-info .info-title {
+				float: left;
+				text-align: left;
+				padding: 0;
+				margin: 0;
+				font-size: 12px;
+				text-transform: uppercase;
+			}
+
+			.report-info .info-date {
+				float: right;
+				padding: 0;
+				font-size: 11px;
+				margin: 2px 0 0 0;
+				line-height: 10px;
+			}
+
+			.default-filter p {
+				float: left;
+				margin-right: 5px;
+				margin-bottom: 5px;
+				margin-top: 4px;
+			}
+
+			.default-filter {
+				font-size: 9px;
+				width: 100%;
+				height: auto;
+				position: relative;
+				padding: 3px 0;
+			}
+
+			.default-filter.no-margin {
+				margin-top: 0px;
+			}
+
+			.default-filter:before {
+				content: '____________________________________________________________________________________________________________________________________________________________________________________________________________';
+				position: absolute;
+				color: #CCCCCC;
+				width: 100%;
+				height: 1px;
+				left: 0;
+				bottom: 2px;
+			}
+
+			.default-filter.no-border:before {
+				display: none;
+			}
+
+			.default-filter ul {
+				margin: 0;
+				list-style: none;
+			}
+
+			.default-filter li {
+				padding: 0;
+				margin: 4px 3px 3px;
+				display: inline-block;
+			}
+
+			.default-filter li span {
+				border: none;
+				-webkit-border-radius: 300px;
+				-moz-border-radius: 300px;
+				border-radius: 300px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="report-company-info">
+			<div class="company-name">{{ this.company.name }}</div>
+			<div class="div-logo">
+				<img class="logo" src="{{ this.logo }}" />
+			</div>
+		</div>
+		<div class="report-info">
+			<h3 class="info-title">{{ this.title }}</h3>
+			{{#if (isNotEmpty this.filters)}}
+				<div class="clearfix"></div>
+				<div class="default-filter">
+					<p><strong>Filtro(s):</strong></p>
+					<ul>
+						{{#each this.filters}}
+							<li>{{this.label}}: <span>{{this.value}}</span></li>
+						{{/each}}
+					</ul>
+				</div>
+			{{/if}}
+		</div>
+
+		<div class="clearfix"></div>
+
+		{{#each consumption}}
+			<div>
+				<h3 class="m-b-10">{{ this.name }}</h3>
+				<span class="text-light text-small"><b>Lote</b> {{ valueOrDefault this.lot_number '-' }} <b>Validade</b>: {{ formatDate this.due_date 'DD/MM/YYYY' }}</span>
+				<table class="table default-table">
+					<thead>
+						<th width="85">Data</th>
+						<th width="100">Descrição</th>
+						<th width="200">Tipo de Operação</th>
+						<th width="220">Origem</th>
+						<th width="220">Destino</th>
+						<th class="text-right" width="80">Anterior</th>
+						<th class="text-right" width="80">Movimentação</th>
+						<th class="text-right" width="80">Saldo</th>
+						<th width="150">Movim. por</th>
+					</thead>
+					<tbody>
+						{{#each this.transactions}}
+							<tr>
+								<td>{{ formatDate this.date 'DD/MM/YYYY' }}</td>
+								<td class="text-ellipsis" style="max-width: 200px;">
+									#TR{{ this.id }}
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'IN') (isEqual this.inventory_transaction_type.subtype 'NFSE_GROUP') this.document_number) }}
+										- NFSe {{ this.document_number }}
+									{{/if}}
+									{{#if (andCondition (isEqual this.inventory_transaction_type.subtype 'PATIENT_KIT_CONSUMPTION') this.inventory_request) }}
+										- KIT ({{ this.inventory_request.inventory_kit.name }} - {{ this.inventory_request.tag_number }})
+									{{/if}}
+								</td>
+								<td class="text-ellipsis" style="max-width: 200px;">
+									{{ this.inventory_transaction_type.description }}
+								</td>
+								<td class="text-ellipsis" style="max-width: 220px;">
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'IN') this.source_provider)}}
+										{{ this.source_provider.name }}
+									{{/if}}
+
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'IN') this.source_warehouse)}}
+										{{ this.source_warehouse.name }}
+									{{/if}}
+
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'OUT') this.source_warehouse)}}
+										{{ this.source_warehouse.name }}
+									{{/if}}
+
+									{{#if (andCondition (includes ['KIT_RETURN', 'PATIENT_CONSUMPTION_RETURN'] this.inventory_transaction_type.subtype))}}
+										{{ this.patient.name }}
+									{{/if}}
+
+									{{#if (andCondition (isEqual this.inventory_transaction_type.subtype 'SECTOR_CONSUMPTION_RETURN'))}}
+										{{ this.cost_center.name }}
+									{{/if}}
+
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'TRANSFER'))}}
+										{{ this.source_warehouse.name }}
+									{{/if}}
+								</td>
+								<td class="text-ellipsis" style="max-width: 220px;">
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'IN') this.target_warehouse)}}
+										{{ this.target_warehouse.name }}
+									{{/if}}
+
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'OUT') this.patient)}}
+										{{ this.patient.name }}
+									{{/if}}
+
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'OUT') this.cost_center)}}
+										{{ this.cost_center.name }}
+									{{/if}}
+
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'OUT') this.target_warehouse)}}
+										{{ this.target_warehouse.name }}
+									{{/if}}
+
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'OUT') this.target_provider)}}
+										{{ this.target_provider.name }}
+									{{/if}}
+
+									{{#if (andCondition (isEqual this.inventory_transaction_type.type 'TRANSFER'))}}
+										{{ this.target_warehouse.name }}
+									{{/if}}
+								</td>
+								<td class="text-right">{{ this.old_balance }}</td>
+								<td class="text-right bold {{ ternary this.is_in 'text-green' '' }} {{ ternary this.is_out 'text-danger' '' }}">
+									{{ ternary this.is_in '+' '' }}{{ ternary this.is_out '-' '' }}{{ this.amount }}
+								</td>
+								<td class="text-right">{{ this.new_balance }}</td>
+								<td class="text-ellipsis" style="max-width: 150px;">{{ this.creator.name }}</td>
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
+		{{/each}}
+	</body>
+
+</html>

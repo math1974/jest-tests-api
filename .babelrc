@@ -1,0 +1,34 @@
+{
+	"compact": true,
+	"minified": true,
+	"comments": false,
+	"sourceType": "unambiguous",
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
+				"targets": {
+					"node": "current"
+				}
+			}
+		]
+	],
+	"plugins": [
+		[
+			"module-resolver",
+			{
+				"alias": {
+					"@utils": "./src/utils",
+					"@routes": "./src/routes",
+					"@models": "./src/models",
+					"@modules": "./src/modules",
+					"@services": "./src/services",
+					"@schemas": "./src/schemas",
+					"@controllers": "./src/controllers",
+					"@middlewares": "./src/middlewares"
+				},
+				"extensions": [".js"]
+			}
+		]
+	]
+}
