@@ -48,18 +48,11 @@ class Database {
 	}
 
 	_authenticate() {
-		return this._instance.authenticate()
-			.then(() => Logger.success('Database is connected'))
-			.catch(error => {
-				Logger.error(`Database connection error: ${error}`);
-				throw error;
-			});
+		return this._instance.authenticate();
 	}
 
 	disconnect() {
-		return this._instance.close()
-			.then(() => Logger.success('Database is disconnected'))
-			.catch(error => Logger.error(`Database disconnection error: ${error}`));
+		return this._instance.close();
 	}
 
 	connect() {

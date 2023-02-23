@@ -11,11 +11,13 @@
   },
   "lint-staged": {
     "**/*.+(js|json|css|html|md)": [
-      "prettier",
       "jest --findRelatedTests",
       "git add"
     ],
     "*.js": "eslint --cache --fix"
+  },
+  "husky": {
+    "pre-commit": "lint-staged && yarn lint && yarn test"
   },
   "scripts": {
     "start": "node build/index.js",

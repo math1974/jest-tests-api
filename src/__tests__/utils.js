@@ -7,4 +7,4 @@ test('sum the values given', () => {
 	const sum = CurrencyUtils.sum(number1, number2);
 
 	expect(sum).toBe(10);
-})
+});

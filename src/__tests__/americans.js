@@ -1,5 +1,5 @@
 const filterAmericanPatients = list => {
-	return (list || []).filter(patient => patient.country === 'USA');
+	return list?.filter(patient => patient.country === 'USA');
 };
 
 test('filter USA patients', () => {

@@ -40,6 +40,7 @@ class App {
 	async start() {
 		this.httpServer.listen(this.port, () => {
 			console.log(`Server running port ${this.port}`);
+
 			this.setup();
 		});
 	}

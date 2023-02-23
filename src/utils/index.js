@@ -4,4 +4,4 @@ import CurrencyUtils from './currency';
 export {
 	AuthUtils,
 	CurrencyUtils
-}
+};

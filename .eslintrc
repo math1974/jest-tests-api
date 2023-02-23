@@ -1,6 +1,6 @@
 {
 	"parserOptions": {
-		"ecmaVersion": 2019,
+		"ecmaVersion": 2020,
 		"sourceType": "module"
 	},
 	"extends": [
@@ -43,14 +43,6 @@
 			"unix"
 		],
 		"no-alert": "error",
-		"no-console": [
-			"error",
-			{
-				"allow": [
-					"info"
-				]
-			}
-		],
 		"no-trailing-spaces": "error",
 		"arrow-parens": [
 			"error",

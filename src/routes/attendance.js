@@ -1,4 +1,3 @@
-import { AttendanceSchema } from '@schemas';
 import { AttendanceController } from '@controllers';
 import BaseRoutes from './base';
 
